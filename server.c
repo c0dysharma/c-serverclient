@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
         exit(1);
     }
     printf("[0]Socket created Successfully....\n");
-    bzero((char *)&serverAddress, sizeof(serverAddress));
-    portNumber = atoi(argv[1]);
+    bzero((char *)&serverAddress, sizeof(serverAddress));//zero out the serverAddress of sizeof(serverAddress)
+    portNumber = atoi(argv[1]); //converts string into int
 
     //serverAddress properties for future binding
     serverAddress.sin_family = AF_INET;         //IPv4
@@ -79,6 +79,10 @@ int main(int argc, char *argv[])
         {
             error("Error: Reading Buffer Faild.");
         }
+        else if (!(strcmp("exit()\n", buffer)))
+        {
+            break;
+        }
         printf("Client: %s\n", buffer);
 
         bzero(buffer, bufferSize);
@@ -90,7 +94,7 @@ int main(int argc, char *argv[])
             printf("Error: Buffer Writting Faild.");
         }
 
-        if (!(strcmp("exit()", buffer)))
+        if (!(strcmp("exit()\n", buffer)))
         {
             break;
         }
